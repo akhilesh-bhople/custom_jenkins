@@ -5,7 +5,7 @@ services:
 
 before_install:
   - curl -L https://goss.rocks/install | sudo sh
-
+  - docker build -t custom_jenkins:latest .
+  
 script:
-  - docker build -t custom_jenkins .
-
+  - dgoss run custom_jenkins:latest

@@ -1,7 +1,6 @@
 file:
   /var/jenkins_home/config.xml:
     exists: true
-    mode: "0644"
     filetype: file
     contains: 
     - RoleBasedAuthorizationStrategy
@@ -11,7 +10,6 @@ file:
     - role name="Developer"
   /var/jenkins_home/copy_reference_file.log:
     exists: true
-    mode: "0644"
     filetype: file
     contains: 
     - INSTALLED plugins/role-strategy.jpi 

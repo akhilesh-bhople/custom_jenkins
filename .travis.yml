@@ -12,9 +12,6 @@ services:
 
 jobs:
   include:
-    - stage: Pre-requisite
-      name: Install Pre-requisite
-      script: curl -L https://goss.rocks/install | sudo sh
     - stage: Build Docker Image
       name: Build
       script:
@@ -24,7 +21,10 @@ jobs:
       - docker push $docker_user/custom_jenkins:$TRAVIS_BUILD_NUMBER
     - stage: Test
       name: Unit Test
-      script: dgoss run custom_jenkins:latest
+      script:
+      - curl -L https://goss.rocks/install | sudo sh
+#      - docker pull $docker_user/custom_jenkins:$TRAVIS_BUILD_NUMBER 
+      - dgoss run $docker_user/custom_jenkins:$TRAVIS_BUILD_NUMBER
     - stage: Extra
       name: extra
       script: docker run --rm $docker_user/custom_jenkins:$TRAVIS_BUILD_NUMBER cat /var/jenkins_home/config.xml

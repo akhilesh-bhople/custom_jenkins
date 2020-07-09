@@ -3,9 +3,29 @@ sudo: required
 services:
   - docker
 
-before_install:
-  - curl -L https://goss.rocks/install | sudo sh
-  - docker build -t custom_jenkins:latest .
+#before_install:
+#  - curl -L https://goss.rocks/install | sudo sh
+#  - docker build -t custom_jenkins:latest .
   
-script:
-  - dgoss run custom_jenkins:latest
+#script:
+#  - dgoss run custom_jenkins:latest
+
+jobs:
+  include:
+    - stage: Pre-requisite
+      name: Install Pre-requisite
+      script: curl -L https://goss.rocks/install | sudo sh
+    - stage: Build Docker Image
+      name: Build
+      script:
+      - echo "$docker_pass" | docker login -u "$docker_user" --password-stdin
+      - docker build -t $docker_user/custom_jenkins:$TRAVIS_BUILD_NUMBER .
+      - docker images
+      - docker push $docker_user/custom_jenkins:$TRAVIS_BUILD_NUMBER
+    - stage: Test
+      name: Unit Test
+      script: dgoss run custom_jenkins:latest
+    - stage: Extra
+      name: extra
+      script: docker run --rm $docker_user/custom_jenkins:$TRAVIS_BUILD_NUMBER cat /var/jenkins_home/config.xml
+

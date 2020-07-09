@@ -1,0 +1,22 @@
+file:
+  /var/jenkins_home/config.xml:
+    exists: true
+    mode: "0644"
+    filetype: file
+    contains: 
+    - RoleBasedAuthorizationStrategy
+    - role name="Deployer"
+    - role name="admin"
+    - role name="Prod-deployer"
+    - role name="Developer"
+  /var/jenkins_home/copy_reference_file.log:
+    exists: true
+    mode: "0644"
+    filetype: file
+    contains: 
+    - INSTALLED plugins/role-strategy.jpi 
+port:
+  tcp:8080:
+    listening: true
+    ip:
+    - 0.0.0.0

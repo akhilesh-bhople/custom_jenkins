@@ -1,5 +1,5 @@
 # custom_jenkins
-https://travis-ci.org/akhilesh-bhople/custom_jenkins.svg?branch=master
+
 This dockerfile creates a custom jenkins image with role based authentication strategy plugin pre-installed and some pre-configured roles. A default 'admin' user is created to disable anonymous user access to the instance.
 
 Following roles are pre-configured in the image:

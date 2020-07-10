@@ -16,19 +16,3 @@ script:
 
 after_success:
   - docker push $docker_user/custom_jenkins:$TRAVIS_BUILD_NUMBER
-
-#jobs:
-#  include:
-#    - stage: Build Docker Image
-#      name: Build
-#      script:
-#      - echo "$docker_pass" | docker login -u "$docker_user" --password-stdin
-#      - docker build -t $docker_user/custom_jenkins:$TRAVIS_BUILD_NUMBER .
-#      - docker images
-#      - docker push $docker_user/custom_jenkins:$TRAVIS_BUILD_NUMBER
-
-#    - stage: Test
-#      name: Unit Test
-#      script:
-#      - curl -L https://goss.rocks/install | sudo sh
-#      - dgoss run $docker_user/custom_jenkins:$TRAVIS_BUILD_NUMBER

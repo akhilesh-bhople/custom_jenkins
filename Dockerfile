@@ -4,8 +4,6 @@ MAINTAINER akhilesh.bhople@gmail.com
 
 ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 
-COPY plugin.txt /var/jenkins_home/
+COPY --chown=jenkins:jenkins jenkins_config/ /var/jenkins_home/
 
 RUN /usr/local/bin/install-plugins.sh < /var/jenkins_home/plugin.txt
-
-COPY config.xml /var/jenkins_home/

@@ -11,6 +11,9 @@
       <role name="Deployer" pattern=".*">
         <permissions>
           <permission>hudson.model.Hudson.Read</permission>
+          <permission>hudson.model.Hudson.SystemRead</permission>
+          <permission>hudson.model.View.Create</permission>
+          <permission>hudson.model.View.Delete</permission>
           <permission>hudson.model.Item.Cancel</permission>
           <permission>hudson.model.Item.Read</permission>
           <permission>hudson.model.Item.Build</permission>
@@ -33,8 +36,8 @@
           <permission>hudson.model.Computer.Build</permission>
           <permission>hudson.model.Item.Configure</permission>
           <permission>hudson.model.View.Read</permission>
+          <permission>hudson.model.Hudson.SystemRead</permission>
           <permission>hudson.model.View.Create</permission>
-          <permission>hudson.model.Hudson.Administer</permission>
           <permission>hudson.model.Computer.ExtendedRead</permission>
           <permission>hudson.model.Item.Cancel</permission>
           <permission>hudson.model.Item.Delete</permission>
@@ -51,6 +54,7 @@
       <role name="Prod-deployer" pattern=".*">
         <permissions>
           <permission>hudson.model.Hudson.Read</permission>
+          <permission>hudson.model.Hudson.SystemRead</permission>
           <permission>hudson.model.Item.Cancel</permission>
           <permission>hudson.model.Item.Read</permission>
           <permission>hudson.model.Item.Build</permission>
@@ -93,14 +97,17 @@
           <permission>hudson.model.Computer.Disconnect</permission>
         </permissions>
         <assignedSIDs>
-          <sid>anonymous</sid>
+          <sid>admin</sid>
         </assignedSIDs>
       </role>
     </roleMap>
     <roleMap type="slaveRoles"/>
     <roleMap type="projectRoles"/>
   </authorizationStrategy>
-  <securityRealm class="hudson.security.SecurityRealm$None"/>
+  <securityRealm class="hudson.security.HudsonPrivateSecurityRealm">
+    <disableSignup>true</disableSignup>
+    <enableCaptcha>false</enableCaptcha>
+  </securityRealm>
   <disableRememberMe>false</disableRememberMe>
   <projectNamingStrategy class="jenkins.model.ProjectNamingStrategy$DefaultProjectNamingStrategy"/>
   <workspaceDir>${JENKINS_HOME}/workspace/${ITEM_FULL_NAME}</workspaceDir>
